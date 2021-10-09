@@ -3,6 +3,7 @@ import simple_colors as colour
 
 class Info:
     """ Class containing logging functions """
+
     def __init__(self):
         pass
 
