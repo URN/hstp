@@ -23,7 +23,7 @@ class TestEpisodeValidation(unittest.TestCase):
                 None,
                 datetime.now(),
                 get_test_file("no_audio.mp3")
-                )
+            )
 
     def test_valid_data(self):
         try:
@@ -35,7 +35,7 @@ class TestEpisodeValidation(unittest.TestCase):
                 None,
                 datetime.now(),
                 get_test_file("audio.mp3")
-                )
+            )
             self.assertTrue(True)
         except ValueError:
             self.fail()
