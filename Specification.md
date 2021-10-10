@@ -34,7 +34,7 @@ All json files should contain the following fields:
 ## Podcast Info - `/holmes-crime-hour.json`
 
 The file name for the podcast should be the `slug` for the podcast
-listed in the `htsp.json` file.
+listed in the `hstp.json` file.
 
 JSON Fields:
 
@@ -61,12 +61,12 @@ RSS feeds are required should be generated at build-time by the program, but can
 
 ## Specification
 
-A copy of this specification should be included in the output directory as `htsp.md`. While not mandatory, it is reccommended, so future implelenters can view the documentation in the event that this repository no longer exists.
+A copy of this specification should be included in the output directory as `hstp.md`. While not mandatory, it is reccommended, so future implelenters can view the documentation in the event that this repository no longer exists.
 
 ## Example
 
 -   `hstp.json`
--   `htsp.md`
+-   `hstp.md`
 -   `holmes-crime-hour.json`
 -   `holmes-crime-hour.jpg`
 -   `holmes-crime-hour/`
@@ -75,4 +75,3 @@ A copy of this specification should be included in the output directory as `htsp
     -   `study-in-scarlet.mp3`
     -   `valley-of-fear.jpg`
     -   `valley-of-fear.mp3`
-

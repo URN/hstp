@@ -2,7 +2,7 @@
 ![License Badge](https://img.shields.io/github/license/URN/hstp?style=for-the-badge)
 ![Release Badge](https://img.shields.io/github/v/release/URN/hstp?style=for-the-badge)
 
-This repository contains both the specification for the HSTP format and a reference implementation, found in the htsp folder.
+This repository contains both the specification for the HSTP format and a reference implementation, found in the hstp folder.
 
 + [Specification Readme](./Specification.md)
 
