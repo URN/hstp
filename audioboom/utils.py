@@ -17,7 +17,7 @@ def make_slug(title):
         s if s in '0123456789-abcdefghijklmnopqrstuvwxyz'
         else '-'
         for s in title.lower().strip()
-        ])
+    ])
     xs = [x for x in long.split("-") if not short_word(x)]
 
     return "-".join(xs)
