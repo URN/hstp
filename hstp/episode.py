@@ -6,7 +6,6 @@ from .utils import is_slug
 
 class Episode:
     """ Class containing the information for a single podcast episode"""
-
     def __init__(self, info, name, slug, description, date, file, thumb=None):
         self.info = info
 
@@ -16,13 +15,13 @@ class Episode:
         if not name or not isinstance(name, str):
             info.error(
                 f"Name is required to be a string, got {type(name)}"
-            )
+                )
             valid = False
 
         if not slug or not isinstance(slug, str):
             info.error(
                 f"Slug is required to be a string, got {type(slug)}"
-            )
+                )
             valid = False
         elif not is_slug(slug):
             info.error(f"Slug `{slug}` is not valid")
@@ -34,13 +33,13 @@ class Episode:
             info.error(
                 f"Description is required to be a string, "
                 f"got {type(description)}"
-            )
+                )
             valid = False
 
         if not date or not isinstance(date, datetime):
             info.error(
                 f"Date is required to be a datetime, got {type(date)}"
-            )
+                )
             valid = False
         else:
             now = datetime.now().astimezone()
@@ -49,19 +48,19 @@ class Episode:
                 info.warn(
                     f"Date `{d}` is in the future, "
                     f"proceed with caution"
-                )
+                    )
 
         if not file or not isinstance(file, str):
             info.error(
                 f"File is required to be a string, got {type(file)}"
-            )
+                )
             valid = False
         else:
             if not file.endswith(".mp3"):
                 info.warn(
                     f"File `{file}` does not have extension mp3, "
                     f"proceed with caution"
-                )
+                    )
             if not os.path.isfile(file):
                 info.error(f"File `{file}` does not exist")
                 valid = False
@@ -72,14 +71,14 @@ class Episode:
             info.error(
                 f"Thumbnail is required to be a string, "
                 f"got {type(description)}"
-            )
+                )
             valid = False
         else:
             if not file.endswith(".jpg"):
                 info.warn(
                     f"Thumbnail `{file}` does not have extension jpg, "
                     f"proceed with caution"
-                )
+                    )
             if not os.path.isfile(file):
                 info.error(f"Thumbnail `{file}` does not exist")
                 valid = False
@@ -95,6 +94,7 @@ class Episode:
         self.thumb = thumb
 
     def dump(self):
+        """ Dump the episode to a dict """
         return {
             "name": self.name,
             "slug": self.slug,
