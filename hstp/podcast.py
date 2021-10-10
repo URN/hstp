@@ -14,13 +14,13 @@ class Podcast:
         if not name or not isinstance(name, str):
             info.error(
                 f"Name is required to be a string, got {type(name)}"
-                )
+            )
             valid = False
 
         if not slug or not isinstance(slug, str):
             info.error(
                 f"Slug is required to be a string, got {type(slug)}"
-                )
+            )
             valid = False
         elif not is_slug(slug):
             info.error(f"Slug `{slug}` is not valid")
@@ -32,21 +32,21 @@ class Podcast:
             info.error(
                 f"Description is required to be a string, "
                 f"got {type(description)}"
-                )
+            )
             valid = False
 
         if not thumb or not isinstance(description, str):
             info.error(
                 f"Thumbnail is required to be a string, "
                 f"got {type(description)}"
-                )
+            )
             valid = False
         else:
             if not thumb.endswith(".jpg"):
                 info.warn(
                     f"Thumbnail `{thumb}` does not have extension jpg, "
                     f"proceed with caution"
-                    )
+                )
             if not os.path.isfile(thumb):
                 info.error(f"Thumbnail `{thumb}` does not exist")
                 valid = False
@@ -67,16 +67,15 @@ class Podcast:
             self.info.warn(
                 f"Episode `{episode.slug}` already exists, "
                 f"overwriting"
-                )
+            )
         self.episodes[episode.slug] = episode
 
     def dump(self, include_episodes=True):
         """ Dumps the podcast to a dict """
-        dates = [
-                    e.date.astimezone().isoformat()
-                    for e in self.episodes.values()
-                ]
-        dates.sort()
+        dates = sorted([
+            e.date.astimezone().isoformat()
+            for e in self.episodes.values()
+        ])
 
         data = {
             "name": self.name,

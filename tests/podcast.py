@@ -23,7 +23,7 @@ class TestPodcastValidation(unittest.TestCase):
                 "Description",
                 parser.parse("1892-03-01"),
                 get_test_file("audio.mp3")
-                )
+            )
 
             e2 = hstp.Episode(
                 hstp.Info(),
@@ -32,7 +32,7 @@ class TestPodcastValidation(unittest.TestCase):
                 "Description",
                 parser.parse("1902-04-01"),
                 get_test_file("audio.mp3")
-                )
+            )
 
             p = hstp.Podcast(
                 hstp.Info(),
