@@ -5,7 +5,7 @@ import audioboom
 parser = argparse.ArgumentParser(
     prog='python -m audioboom-downloader',
     description='Download Audioboom podcasts'
-    )
+)
 
 parser.add_argument("id", help="The ID of the audioboom channel")
 parser.add_argument("-v", "--verbose", help="increase output verbosity",
