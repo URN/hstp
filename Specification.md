@@ -76,3 +76,24 @@ A copy of this specification should be included in the output directory as `htsp
     -   `valley-of-fear.jpg`
     -   `valley-of-fear.mp3`
 
+## HSTP Serialisation Toolkit & Publisher
+
+This is the python codebase included in the repository.
+
+the command `hstp` 
+
+### Input file format
+
+-   `hstp_root.txt` - contains a list of podcasts to ignore (if any)
+    -   `podcast_slug/`
+        -   `image.jpg` - Thumbnail for the podcast
+        -   `podcast.txt` - Description of the podcast
+            -   The first line is read as the title
+            -   Subsequent lines will be read from the file as its desciption
+        -   `episode_slug/`
+             -   `episode.txt` - Description for the podcast
+                 -   The first line is read as the title
+                 -   The second line is read as the date. If it is not there, it will source if from the the created date from the MP3 file
+                 -   Subsequent lines will be read from the file as its desciption
+             -   `audio.mp3` - The audio of the podcast
+             -   `image.jpg` - (Optional) icon for the podcast     
