@@ -34,7 +34,7 @@ All json files should contain the following fields:
 ## Podcast Info - `/holmes-crime-hour.json`
 
 The file name for the podcast should be the `slug` for the podcast
-listed in the `htsp.json` file.
+listed in the `hstp.json` file.
 
 JSON Fields:
 
@@ -61,12 +61,12 @@ RSS feeds are required should be generated at build-time by the program, but can
 
 ## Specification
 
-A copy of this specification should be included in the output directory as `htsp.md`. While not mandatory, it is reccommended, so future implelenters can view the documentation in the event that this repository no longer exists.
+A copy of this specification should be included in the output directory as `hstp.md`. While not mandatory, it is reccommended, so future implelenters can view the documentation in the event that this repository no longer exists.
 
 ## Example
 
 -   `hstp.json`
--   `htsp.md`
+-   `hstp.md`
 -   `holmes-crime-hour.json`
 -   `holmes-crime-hour.jpg`
 -   `holmes-crime-hour/`
@@ -96,4 +96,4 @@ the command `hstp`
                  -   The second line is read as the date. If it is not there, it will source if from the the created date from the MP3 file
                  -   Subsequent lines will be read from the file as its desciption
              -   `audio.mp3` - The audio of the podcast
-             -   `image.jpg` - (Optional) icon for the podcast     
+             -   `image.jpg` - (Optional) icon for the podcast

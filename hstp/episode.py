@@ -95,6 +95,7 @@ class Episode:
         self.thumb = thumb
 
     def dump(self):
+        """ Dump the episode to a dict """
         return {
             "name": self.name,
             "slug": self.slug,
