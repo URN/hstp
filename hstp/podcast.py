@@ -27,7 +27,7 @@ class Podcast:
             valid = False
 
         if not description:
-            info.warn(f"A description is highly reccommended.")
+            info.warn(f"A description is highly recommended.")
         elif not isinstance(description, str):
             info.error(
                 f"Description is required to be a string, "
