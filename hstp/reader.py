@@ -23,8 +23,9 @@ class Reader:
                 title = lines[0]
                 d = '\n'.join(lines[1:])
 
-                p = hstp.Podcast(self.info, title, slug, d, f"{self.input_path}{slug}/image.jpg")
-            
+                p = hstp.Podcast(self.info, title, slug, d,
+                                 f"{self.input_path}{slug}/image.jpg")
+
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:
                 with open(f"{self.input_path}/{slug}/{ep_slug}/description.txt") as desc:

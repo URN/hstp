@@ -12,7 +12,11 @@ parser = argparse.ArgumentParser(
 parser.add_argument("-v", "--verbose", help="increase output verbosity",
                     action="store_true")
 parser.add_argument("-i", "--input", help="input directory")
-parser.add_argument("-o", "--output", help="output directory", default="../out")
+parser.add_argument(
+    "-o",
+    "--output",
+    help="output directory",
+    default="../out")
 
 args = parser.parse_args()
 
