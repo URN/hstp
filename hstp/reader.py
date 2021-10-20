@@ -60,10 +60,10 @@ class Reader:
             hstp_out['podcasts'].append(p.dump(False))
             with open(f"{output_path}/{p.slug}.json", 'w') as f:
                 f.write(json.dumps(p.dump(True)))
-            
+
             if not os.path.exists(f"{output_path}/{p.slug}"):
                 os.makedirs(f"{output_path}/{p.slug}")
-            
+
             copyfile(p.thumb, f"{output_path}/{p.slug}.jpg")
 
             for e in p.episodes.values():
