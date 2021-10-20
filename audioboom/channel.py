@@ -125,7 +125,7 @@ class Channel:
                 f.write(i.content)
 
         # Does not download the audios, just outputs a list to be used in download_tool.py
-        #with open(join(path, "audio.mp3"), 'wb') as f:
+        # with open(join(path, "audio.mp3"), 'wb') as f:
         #    pass
         #    a = requests.get(ep.mp3, allow_redirects=True)
         #    f.write(a.content)
