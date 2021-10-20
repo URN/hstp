@@ -2,9 +2,10 @@ from audioboom import *
 import audioboom
 import audioboom.utils as utils
 
-from os.path import join, exists
+from os.path import join, exists, relpath
 from os import mkdir
 import requests
+import time
 
 
 class Channel:
@@ -93,7 +94,7 @@ class Channel:
                         continue
                     ep_ = [e for e in self.episodes if e.id == id][0]
                     path__ = join(path_, ep_.slug)
-                    self.save_episode(path__, ep_)
+                    self.save_episode(path__, ep_, root)
                     consumed.append(ep_.id)
 
         # save unused episodes
@@ -107,9 +108,10 @@ class Channel:
                 path_ = join(path, ep.slug)
 
             mkdir(path_)
-            self.save_episode(path_, ep)
+            self.save_episode(path_, ep, root)
 
-    def save_episode(self, path, ep):
+    def save_episode(self, path, ep, root):
+        print(f"Saving {ep.title} to {path}")
         if not exists(path):
             mkdir(path)
 
@@ -122,7 +124,12 @@ class Channel:
                 i = requests.get(ep.thumbnail, allow_redirects=True)
                 f.write(i.content)
 
-        with open(join(path, "audio.mp3"), 'wb') as f:
-            pass
-            a = requests.get(ep.mp3, allow_redirects=True)
-            f.write(a.content)
+        # Does not download the audios, just outputs a list to be used in download_tool.py
+        #with open(join(path, "audio.mp3"), 'wb') as f:
+        #    pass
+        #    a = requests.get(ep.mp3, allow_redirects=True)
+        #    f.write(a.content)
+
+        with open(join(root, "downloads.txt"), 'a') as f:
+            out = join(relpath(path, root), "audio.mp3")
+            f.write(f"{ep.mp3}\t{out}\n")
