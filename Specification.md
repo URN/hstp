@@ -4,7 +4,7 @@
 
 [Github Repository](https://github.com/URN/hstp)
 
-VERSION 1.0
+VERSION 2.0
 
 ## Motivation
 
@@ -46,8 +46,11 @@ JSON Fields:
     -   `slug` - The url slug of the podcast. It should consist only of lowecase letters, numbers and hypens (eg `adventures-engineers-thumb`)
     -   `description` - plain-text formatted description of the podcast episode (optional)
     -   `date` - ISO8601 compatible date-time from when the episode was added.
+    -   `has-image` -  boolean on whether or not the corresponding episode has an image
 -   `first-episode` - ISO8601 compatible date-time from when the first episode was added.
 -   `last-updated` - ISO8601 compatible date-time from when the latest episode was added.
+-    `links` - JSON object of external links as key/value pairs. For example (Optional, may be empty/null in trees older than v1)
+    -   `spotify` -  link to the spotify podcast
 
 ## Images & Media Files
 
@@ -97,3 +100,7 @@ the command `hstp`
                  -   Subsequent lines will be read from the file as its desciption
              -   `audio.mp3` - The audio of the podcast
              -   `image.jpg` - (Optional) icon for the podcast
+        -   `links.txt` - List of links (Apple Music, Spotify etc) in the format 
+        ```
+        https://example.com Example Website
+        ```
