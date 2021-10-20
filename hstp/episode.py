@@ -68,20 +68,20 @@ class Episode:
 
         if not thumb:
             info.warn(f"A thumbnail is highly reccommended.")
-        elif not isinstance(description, str):
+        elif not isinstance(thumb, str):
             info.error(
                 f"Thumbnail is required to be a string, "
-                f"got {type(description)}"
+                f"got {type(thumb)}"
             )
             valid = False
         else:
-            if not file.endswith(".jpg"):
+            if not thumb.endswith(".jpg"):
                 info.warn(
-                    f"Thumbnail `{file}` does not have extension jpg, "
+                    f"Thumbnail `{thumb}` does not have extension jpg, "
                     f"proceed with caution"
                 )
-            if not os.path.isfile(file):
-                info.error(f"Thumbnail `{file}` does not exist")
+            if not os.path.isfile(thumb):
+                info.error(f"Thumbnail `{thumb}` does not exist")
                 valid = False
 
         if not valid:
