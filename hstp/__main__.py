@@ -26,4 +26,5 @@ if not args.output or (not os.path.isdir(args.input)):
     i.error("Input directory does not exist")
     exit(1)
 
-r = hstp.Reader(args.input)
+r = hstp.Reader(i, args.input)
+r.load_podcasts()

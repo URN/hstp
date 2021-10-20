@@ -103,7 +103,7 @@ class Channel:
             path_ = join(path, ep.slug)
 
             while exists(path_):
-                ep.slug += '_'
+                ep.slug += '-'
                 path_ = join(path, ep.slug)
 
             mkdir(path_)
