@@ -32,3 +32,4 @@ if not args.output or (not os.path.isdir(args.input)):
 
 r = hstp.Reader(i, args.input)
 r.load_podcasts()
+r.save(args.output)

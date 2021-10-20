@@ -88,6 +88,7 @@ class Podcast:
         if include_episodes:
             e = [e.dump() for e in self.episodes.values()]
             e.sort(key=lambda x: x["date"])
+            e.reverse()
             data["episodes"] = e
 
         return data
