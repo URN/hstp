@@ -5,6 +5,8 @@ import os
 import json
 from shutil import copyfile
 
+from feedgen.feed import FeedGenerator
+
 
 class Reader:
     """ Read in an input tree to a station object """
@@ -57,6 +59,14 @@ class Reader:
         hstp_out = dict()
         hstp_out['podcasts'] = []
         for p in self.podcasts:
+            podcast_rss = FeedGenerator()
+
+            podcast_rss.id(p.slug)
+            podcast_rss.title(p.name)
+            podcast_rss.subtitle(p.description)
+            podcast_rss.description(p.description)
+            podcast_rss.link({"href": "https://example.org/", "rel": "alternate"})
+
             hstp_out['podcasts'].append(p.dump(False))
             with open(f"{output_path}/{p.slug}.json", 'w') as f:
                 f.write(json.dumps(p.dump(True)))
@@ -70,6 +80,17 @@ class Reader:
                 copyfile(e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
                 if e.thumb is not None:
                     copyfile(e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
+
+                entry = podcast_rss.add_entry()
+
+                entry.id(e.slug)
+                entry.title(e.name)
+                entry.description(e.description)
+                entry.published(e.date)
+                entry.link({"href": "https://example.org/", "rel": "alternate"})
+
+            podcast_rss.atom_file(f"{output_path}/{p.slug}.atom.xml")
+            podcast_rss.rss_file(f"{output_path}/{p.slug}.rss.xml")
 
         hstp_out['podcasts'].sort(key=lambda x: x['last-updated'])
         hstp_out['podcasts'].reverse()
