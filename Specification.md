@@ -50,7 +50,7 @@ JSON Fields:
     -   `content-length` - the size of the mp3 file, in bytes
 -   `first-episode` - ISO8601 compatible date-time from when the first episode was added.
 -   `last-updated` - ISO8601 compatible date-time from when the latest episode was added.
--    `links` - JSON object of external links as key/value pairs. For example (Optional, may be empty/null in trees older than v1)
+-    `links` - JSON object of external links as key/value pairs. For example (Optional, may be empty/null in trees older than v2)
     -   `spotify` -  link to the spotify podcast
 
 ## Images & Media Files

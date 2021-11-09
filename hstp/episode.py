@@ -65,9 +65,12 @@ class Episode:
             if not os.path.isfile(file):
                 info.error(f"File `{file}` does not exist")
                 valid = False
+            else:
+                self.file_size = os.path.getsize(file)
 
         if not thumb:
             info.warn(f"A thumbnail is highly reccommended.")
+            self.has_image = False
         elif not isinstance(thumb, str):
             info.error(
                 f"Thumbnail is required to be a string, "
@@ -83,6 +86,8 @@ class Episode:
             if not os.path.isfile(thumb):
                 info.error(f"Thumbnail `{thumb}` does not exist")
                 valid = False
+
+            self.has_image = True
 
         if not valid:
             raise ValueError("Invalid Episode")
@@ -101,4 +106,6 @@ class Episode:
             "slug": self.slug,
             "description": self.description,
             "date": self.date.astimezone().isoformat(),
+            "has-image": self.has_image,
+            "content-length": self.content_length
         }

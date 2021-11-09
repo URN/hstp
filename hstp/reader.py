@@ -28,6 +28,12 @@ class Reader:
                 p = hstp.Podcast(self.info, title, slug, d,
                                  f"{self.input_path}/{slug}/image.jpg")
 
+            links_path = f"{self.input_path}/{slug}/links.txt"
+            if os.path.exists(links_path):
+                with open(links_path) as desc:
+                    lines = desc.read().split("\n")
+                    self.links = {_l.split()[0]: _l.split()[1] for _l in lines}
+
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:
                 with open(f"{self.input_path}/{slug}/{ep_slug}/description.txt") as desc:
