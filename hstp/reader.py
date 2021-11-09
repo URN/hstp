@@ -32,7 +32,10 @@ class Reader:
             if os.path.exists(links_path):
                 with open(links_path) as desc:
                     lines = desc.read().split("\n")
-                    self.links = {_l.split()[0]: _l.split()[1] for _l in lines}
+                    self.links = dict()
+                    for line in lines:
+                        s = line.split(" ")
+                        self.links[" ".join(s[1:])] = s[0]
 
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:

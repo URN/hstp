@@ -66,7 +66,7 @@ class Episode:
                 info.error(f"File `{file}` does not exist")
                 valid = False
             else:
-                self.file_size = os.path.getsize(file)
+                self.content_length = os.path.getsize(file)
 
         if not thumb:
             info.warn(f"A thumbnail is highly reccommended.")
