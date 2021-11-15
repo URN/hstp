@@ -72,8 +72,8 @@ class Reader:
 
             podcast_rss.id(p.slug)
             podcast_rss.title(p.name)
-            podcast_rss.subtitle(p.description)
-            podcast_rss.description(p.description)
+            podcast_rss.subtitle(p.description or "")
+            podcast_rss.description(p.description or "No Description was provided")
             podcast_rss.link({"href": "https://example.org/", "rel": "alternate"})
 
             hstp_out['podcasts'].append(p.dump(False))
