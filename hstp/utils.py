@@ -1,4 +1,5 @@
 import os
+import shutil
 
 
 def is_slug(string):
@@ -17,3 +18,11 @@ def subdirectories(dir):
 def path_or_none(file):
     if os.path.exists(file):
         return file
+
+
+def copyfile(src, dst):
+    if os.path.isfile(dst):
+        # Add more conditions here
+        if os.path.getsize(src) == os.path.getsize(dst):
+            return
+    shutil.copyfile(src, dst)

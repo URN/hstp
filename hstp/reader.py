@@ -3,7 +3,6 @@ import hstp.utils
 from dateutil.parser import parse
 import os
 import json
-from shutil import copyfile
 
 
 class Reader:
@@ -73,12 +72,12 @@ class Reader:
             if not os.path.exists(f"{output_path}/{p.slug}"):
                 os.makedirs(f"{output_path}/{p.slug}")
 
-            copyfile(p.thumb, f"{output_path}/{p.slug}.jpg")
+            hstp.utils.copyfile(p.thumb, f"{output_path}/{p.slug}.jpg")
 
             for e in p.episodes.values():
-                copyfile(e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
+                hstp.utils.copyfile(e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
                 if e.thumb is not None:
-                    copyfile(e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
+                    hstp.utils.copyfile(e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
 
         hstp_out['podcasts'].sort(key=lambda x: x['last-updated'])
         hstp_out['podcasts'].reverse()
