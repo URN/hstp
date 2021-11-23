@@ -141,7 +141,7 @@ class Podcast:
             SubElement(i, "pubDate").text = e.date.astimezone().isoformat()
             SubElement(i, "title").text = e.name
             SubElement(i, "description").text = e.description
-            SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(e.duration)
+            SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(int(e.duration + 0.5))
             SubElement(i, QName(NSMAP['itunes'], "explicit")).text = "no"
             if e.has_image:
                 SubElement(i, QName(NSMAP['itunes'], "image")).set(
