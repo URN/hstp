@@ -121,11 +121,14 @@ class Podcast:
         SubElement(c, "link").text = f"{data['webroot']}/{self.slug}.xml"
         SubElement(c, "language").text = data['lang']
         SubElement(c, QName(NSMAP['itunes'], "author")).text = data['author']
-        SubElement(c, QName(NSMAP['itunes'], "image")).set("href", f"{data['webroot']}/{self.slug}.jpg")
+        SubElement(c, QName(NSMAP['itunes'], "image")).set(
+            "href", f"{data['webroot']}/{self.slug}.jpg")
         SubElement(c, QName(NSMAP['itunes'], "explicit")).text = "no"
-        SubElement(c, QName(NSMAP['itunes'], "category")).text = "Technology" # Load from somewhere
+        SubElement(c, QName(NSMAP['itunes'], "category")
+                   ).text = "Technology"  # Load from somewhere
         SubElement(c, QName(NSMAP['itunes'], "type")).text = "episodic"
-        SubElement(c, QName(NSMAP['itunes'], "countryOfOrigin")).text = "GB US" # British, but will promote to US
+        # British, but will promote to US
+        SubElement(c, QName(NSMAP['itunes'], "countryOfOrigin")).text = "GB US"
 
         for e in self.episodes.values():
             i = SubElement(c, "item")
@@ -141,7 +144,8 @@ class Podcast:
             SubElement(i, "pubDate").text = e.date.astimezone().isoformat()
             SubElement(i, "title").text = e.name
             SubElement(i, "description").text = e.description
-            SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(int(e.duration + 0.5))
+            SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(
+                int(e.duration + 0.5))
             SubElement(i, QName(NSMAP['itunes'], "explicit")).text = "no"
             if e.has_image:
                 SubElement(i, QName(NSMAP['itunes'], "image")).set(
