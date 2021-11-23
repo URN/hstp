@@ -81,9 +81,11 @@ class Reader:
             hstp.utils.copyfile(p.thumb, f"{output_path}/{p.slug}.jpg")
 
             for e in p.episodes.values():
-                hstp.utils.copyfile(e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
+                hstp.utils.copyfile(
+                    e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
                 if e.thumb is not None:
-                    hstp.utils.copyfile(e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
+                    hstp.utils.copyfile(
+                        e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
 
         hstp_out['podcasts'].sort(key=lambda x: x['last-updated'])
         hstp_out['podcasts'].reverse()
