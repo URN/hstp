@@ -135,12 +135,11 @@ class Podcast:
 
             enc = SubElement(i, "enclosure")
             enc.set("url", f"{data['webroot']}/{self.slug}/{e.slug}.mp3")
-            enc.set("length", str(e.size))
+            enc.set("length", str(e.content_length))
             enc.set("type", "audio/mpeg")
 
             SubElement(i, "pubDate").text = e.date.astimezone().isoformat()
-            SubElement(i, "title").text = e.title
-            SubElement(i, "title").text = e.title
+            SubElement(i, "title").text = e.name
             SubElement(i, "description").text = e.description
             SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(e.duration)
             SubElement(i, QName(NSMAP['itunes'], "explicit")).text = "no"
