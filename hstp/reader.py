@@ -4,6 +4,7 @@ from dateutil.parser import parse
 import os
 import json
 from shutil import copyfile
+from lxml.etree import tounicode as xml_tostring
 
 
 class Reader:
@@ -59,7 +60,10 @@ class Reader:
         for p in self.podcasts:
             hstp_out['podcasts'].append(p.dump(False))
             with open(f"{output_path}/{p.slug}.json", 'w') as f:
-                f.write(json.dumps(p.dump(True)))
+                f.write(json.dumps(p.dump(True), indent=4))
+
+            with open(f"{output_path}/{p.slug}.xml", 'w') as f:
+                f.write(xml_tostring(p.dump_rss(), pretty_print=True))
 
             if not os.path.exists(f"{output_path}/{p.slug}"):
                 os.makedirs(f"{output_path}/{p.slug}")

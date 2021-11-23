@@ -3,6 +3,8 @@ from datetime import datetime
 
 from .utils import is_slug
 
+from lxml.etree import Element, SubElement, QName, tounicode
+
 
 class Podcast:
     def __init__(self, info, name, slug, description, thumb):
@@ -92,3 +94,65 @@ class Podcast:
             data["episodes"] = e
 
         return data
+
+    def dump_rss(self):
+        """ Dumps the podcast to an RSS feed """
+        data = {
+            "webroot": "https://podcasts.urn1350.net",
+            "lang": "en",
+            "author": "urn1350",
+            "website": "https://urn1350.net/podcasts/{slug}#{episode}"
+        }
+
+        NSMAP = {
+            "atom": "http://www.w3.org/2005/Atom",
+            "itunes": "http://www.itunes.com/dtds/podcast-1.0.dtd",
+            "dcterms": "http://purl.org/dc/terms/",
+            "spotify": "http://www.spotify.com/ns/rss",
+            "psc": "http://podlove.org/simple-chapters",
+        }
+
+        root = Element("rss", nsmap=NSMAP)
+        root.set("version", "2.0")
+
+        c = SubElement(root, "channel")
+        SubElement(c, "title").text = self.name
+        SubElement(c, "description").text = self.description
+        SubElement(c, "link").text = f"{data['webroot']}/{self.slug}.xml"
+        SubElement(c, "language").text = data['lang']
+        SubElement(c, QName(NSMAP['itunes'], "author")).text = data['author']
+        SubElement(c, QName(NSMAP['itunes'], "image")).set("href", f"{data['webroot']}/{self.slug}.jpg")
+        SubElement(c, QName(NSMAP['itunes'], "explicit")).text = "no"
+        SubElement(c, QName(NSMAP['itunes'], "category")).text = "Technology" # Load from somewhere
+        SubElement(c, QName(NSMAP['itunes'], "type")).text = "episodic"
+        SubElement(c, QName(NSMAP['itunes'], "countryOfOrigin")).text = "GB US" # British, but will promote to US
+
+        for e in self.episodes.values():
+            i = SubElement(c, "item")
+            g = SubElement(i, "guid")
+            g.text = data["website"].format(slug=self.slug, episode=e.slug)
+            g.set("isPermaLink", "true")
+
+            enc = SubElement(i, "enclosure")
+            enc.set("url", f"{data['webroot']}/{self.slug}/{e.slug}.mp3")
+            enc.set("length", str(e.size))
+            enc.set("type", "audio/mpeg")
+
+            SubElement(i, "pubDate").text = e.date.astimezone().isoformat()
+            SubElement(i, "title").text = e.title
+            SubElement(i, "title").text = e.title
+            SubElement(i, "description").text = e.description
+            SubElement(i, QName(NSMAP['itunes'], "duration")).text = str(e.duration)
+            SubElement(i, QName(NSMAP['itunes'], "explicit")).text = "no"
+            if e.has_image:
+                SubElement(i, QName(NSMAP['itunes'], "image")).set(
+                    "href",
+                    f"{data['webroot']}/{self.slug}/{e.slug}.jpg"
+                )
+            else:
+                SubElement(i, QName(NSMAP['itunes'], "image")).set(
+                    "href",
+                    f"{data['webroot']}/{self.slug}.jpg"
+                )
+
+        return root
