@@ -101,7 +101,8 @@ class Podcast:
             "webroot": "https://podcasts.urn1350.net",
             "lang": "en",
             "author": "urn1350",
-            "website": "https://urn1350.net/podcasts/{slug}#{episode}"
+            "website": "https://urn1350.net/podcasts/{slug}#{episode}",
+            "email": "technical@urn1350.net"
         }
 
         NSMAP = {
@@ -117,7 +118,7 @@ class Podcast:
 
         c = SubElement(root, "channel")
         SubElement(c, "title").text = self.name
-        SubElement(c, "description").text = self.description
+        SubElement(c, "description").text = self.description or "No Description Provided"
         SubElement(c, "link").text = f"{data['webroot']}/{self.slug}.xml"
         SubElement(c, "language").text = data['lang']
         SubElement(c, QName(NSMAP['itunes'], "author")).text = data['author']
@@ -129,6 +130,10 @@ class Podcast:
         SubElement(c, QName(NSMAP['itunes'], "type")).text = "episodic"
         # British, but will promote to US
         SubElement(c, QName(NSMAP['itunes'], "countryOfOrigin")).text = "GB US"
+
+        o = SubElement(c, QName(NSMAP['itunes'], "owner"))
+        SubElement(o, QName(NSMAP['itunes'], "name")).text = data['author']
+        SubElement(o, QName(NSMAP['itunes'], "email")).text = data['email']
 
         for e in self.episodes.values():
             i = SubElement(c, "item")
