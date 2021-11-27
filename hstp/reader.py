@@ -7,6 +7,7 @@ import json
 from shutil import copyfile
 from lxml import etree
 
+
 class Reader:
     """ Read in an input tree to a station object """
 

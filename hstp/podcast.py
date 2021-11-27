@@ -118,7 +118,8 @@ class Podcast:
 
         c = SubElement(root, "channel")
         SubElement(c, "title").text = self.name
-        SubElement(c, "description").text = self.description or "No Description Provided"
+        SubElement(
+            c, "description").text = self.description or "No Description Provided"
         SubElement(c, "link").text = f"{data['webroot']}/{self.slug}.xml"
         SubElement(c, "language").text = data['lang']
         SubElement(c, QName(NSMAP['itunes'], "author")).text = data['author']
