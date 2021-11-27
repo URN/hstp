@@ -5,8 +5,7 @@ import os
 import json
 
 from shutil import copyfile
-from lxml.etree import tounicode as xml_tostring
-
+from lxml import etree
 
 class Reader:
     """ Read in an input tree to a station object """
@@ -72,8 +71,13 @@ class Reader:
             with open(f"{output_path}/{p.slug}.json", 'w') as f:
                 f.write(json.dumps(p.dump(True), indent=4))
 
-            with open(f"{output_path}/{p.slug}.xml", 'w') as f:
-                f.write(xml_tostring(p.dump_rss(), pretty_print=True))
+            with open(f"{output_path}/{p.slug}.xml", 'wb') as f:
+                f.write(etree.tostring(
+                    p.dump_rss(),
+                    pretty_print=True,
+                    xml_declaration=True,
+                    encoding='utf-8'
+                ))
 
             if not os.path.exists(f"{output_path}/{p.slug}"):
                 os.makedirs(f"{output_path}/{p.slug}")
