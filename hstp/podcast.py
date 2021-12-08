@@ -7,7 +7,7 @@ from lxml.etree import Element, SubElement, QName, tounicode
 
 
 class Podcast:
-    def __init__(self, info, name, slug, description, thumb, links):
+    def __init__(self, info, name, slug, description, thumb, links = None):
         self.info = info
 
         # Check Arguments
