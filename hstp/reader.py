@@ -4,6 +4,9 @@ from dateutil.parser import parse
 import os
 import json
 
+from shutil import copyfile
+from lxml import etree
+
 
 class Reader:
     """ Read in an input tree to a station object """
@@ -24,17 +27,17 @@ class Reader:
                 title = lines[0]
                 d = '\n'.join(lines[1:])
 
-                p = hstp.Podcast(self.info, title, slug, d,
-                                 f"{self.input_path}/{slug}/image.jpg")
-
+            links = dict()
             links_path = f"{self.input_path}/{slug}/links.txt"
             if os.path.exists(links_path):
                 with open(links_path) as desc:
                     lines = desc.read().split("\n")
-                    self.links = dict()
                     for line in lines:
                         s = line.split(" ")
-                        self.links[" ".join(s[1:])] = s[0]
+                        links[" ".join(s[1:])] = s[0]
+
+            p = hstp.Podcast(self.info, title, slug, d,
+                             f"{self.input_path}/{slug}/image.jpg", links)
 
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:
@@ -67,7 +70,15 @@ class Reader:
         for p in self.podcasts:
             hstp_out['podcasts'].append(p.dump(False))
             with open(f"{output_path}/{p.slug}.json", 'w') as f:
-                f.write(json.dumps(p.dump(True)))
+                f.write(json.dumps(p.dump(True), indent=4))
+
+            with open(f"{output_path}/{p.slug}.xml", 'wb') as f:
+                f.write(etree.tostring(
+                    p.dump_rss(),
+                    pretty_print=True,
+                    xml_declaration=True,
+                    encoding='utf-8'
+                ))
 
             if not os.path.exists(f"{output_path}/{p.slug}"):
                 os.makedirs(f"{output_path}/{p.slug}")
@@ -75,9 +86,11 @@ class Reader:
             hstp.utils.copyfile(p.thumb, f"{output_path}/{p.slug}.jpg")
 
             for e in p.episodes.values():
-                hstp.utils.copyfile(e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
+                hstp.utils.copyfile(
+                    e.file, f"{output_path}/{p.slug}/{e.slug}.mp3")
                 if e.thumb is not None:
-                    hstp.utils.copyfile(e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
+                    hstp.utils.copyfile(
+                        e.thumb, f"{output_path}/{p.slug}/{e.slug}.jpg")
 
         hstp_out['podcasts'].sort(key=lambda x: x['last-updated'])
         hstp_out['podcasts'].reverse()

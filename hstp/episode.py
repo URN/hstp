@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from mutagen.mp3 import MP3
 
 from .utils import is_slug
 
@@ -66,6 +67,12 @@ class Episode:
                 info.error(f"File `{file}` does not exist")
                 valid = False
             else:
+                try:
+                    x = MP3(file)
+                    self.duration = x.info.length
+                except Exception as e:
+                    info.error(f"File `{file}` is not a valid mp3 file")
+                    valid = False
                 self.content_length = os.path.getsize(file)
 
         if not thumb:
