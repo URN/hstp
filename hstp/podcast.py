@@ -7,7 +7,7 @@ from lxml.etree import Element, SubElement, QName, tounicode
 
 
 class Podcast:
-    def __init__(self, info, name, slug, description, thumb):
+    def __init__(self, info, name, slug, description, thumb, links):
         self.info = info
 
         # Check Arguments
@@ -53,6 +53,9 @@ class Podcast:
                 info.error(f"Thumbnail `{thumb}` does not exist")
                 valid = False
 
+        if links is None or not isinstance(links, dict):
+            info.error("Links must be links")
+
         if not valid:
             raise ValueError("Invalid Podcast")
 
@@ -60,6 +63,7 @@ class Podcast:
         self.slug = slug
         self.description = description
         self.thumb = thumb
+        self.links = links
 
         self.episodes = dict()
 
@@ -84,7 +88,8 @@ class Podcast:
             "slug": self.slug,
             "description": self.description,
             "last-updated": dates[-1],
-            "first-episode": dates[0]
+            "first-episode": dates[0],
+            "links": self.links
         }
 
         if include_episodes:
