@@ -27,18 +27,17 @@ class Reader:
                 title = lines[0]
                 d = '\n'.join(lines[1:])
 
-               
             links = dict()
             links_path = f"{self.input_path}/{slug}/links.txt"
             if os.path.exists(links_path):
                 with open(links_path) as desc:
-                    lines = desc.read().split("\n")        
+                    lines = desc.read().split("\n")
                     for line in lines:
                         s = line.split(" ")
                         links[" ".join(s[1:])] = s[0]
 
             p = hstp.Podcast(self.info, title, slug, d,
-                            f"{self.input_path}/{slug}/image.jpg", links)
+                             f"{self.input_path}/{slug}/image.jpg", links)
 
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:
