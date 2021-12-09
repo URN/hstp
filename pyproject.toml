@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "hstp"
+version = "2.0.0"
+description = "hstp build"
+authors = ["University Radio Nottingham <web@urn1350.net>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+lxml = "4.6.4"
+mutagen = "1.45.1"
+pep8 = "1.7.1"
+pycodestyle = "2.7.0"
+python-dateutil = "2.8.2"
+simple-colors = "0.1.5"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
