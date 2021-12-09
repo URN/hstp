@@ -1,0 +1,7 @@
+version: '3.0'
+services:
+  build-files:
+    build: .
+    volumes:
+      - ./input:/input
+      - ./out:/output
