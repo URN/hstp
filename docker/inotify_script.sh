@@ -2,7 +2,7 @@
 
 crond
 
-inotifywait -m /input -e create -e moved_to |
+inotifywait -m /input -r |
     while read directory action file; do
         touch /changed
     done
