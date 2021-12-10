@@ -5,3 +5,4 @@ services:
     volumes:
       - ./input:/input
       - ./out:/output
+      - ./log:/log
