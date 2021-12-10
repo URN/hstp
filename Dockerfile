@@ -3,7 +3,7 @@ FROM python:3.8-alpine
 RUN apk add git inotify-tools
 
 COPY /docker/cron_script.sh /docker/inotify_script.sh /bin/
-COPY /docker/build.crontab /etc/crontab/root
+COPY /docker/build.crontab /etc/crontabs/root
 
 COPY . /build
 
