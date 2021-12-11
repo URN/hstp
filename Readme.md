@@ -11,3 +11,6 @@ This repository contains both the specification for the HSTP format and a refere
 + Releases of the reference implementation, these should be tagged in the github
     + The Major release should correspond with the standard
     + The Minor release should be the patch number
+
+## 3rd party content
++ `tests/data/audio.mp3` is "Danse Macabre" by Kevin MacLeod (incompetech.com). Licensed under Creative Commons:  Attribution 4.0 License http://creativecommons.org/licenses/by/4.0/
