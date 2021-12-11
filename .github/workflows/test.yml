@@ -10,6 +10,6 @@ jobs:
         with:
           python-version: '3.8'
       - name: install hstp
-        command: pip install .
+        run: pip install .
       - name: test
-        command: python -m unittest
+        run: python -m unittest
