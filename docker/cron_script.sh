@@ -1,4 +1,4 @@
-#! /bin/sh
+#! /bin/bash
 
 if [ -e /changed ]; then
     timeSinceMod=$(($(date +%s) - $(date +%s -r /changed)))
