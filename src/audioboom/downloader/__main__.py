@@ -2,6 +2,7 @@ import argparse
 
 import audioboom
 
+
 def main():
     parser = argparse.ArgumentParser(
         prog='python -m audioboom-downloader',
@@ -21,6 +22,7 @@ def main():
     c.get_playlists()
 
     c.save(args.output)
+
 
 if __name__ == "__main__":
     main()
