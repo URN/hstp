@@ -3,6 +3,7 @@ import os
 
 import hstp
 
+
 def main():
 
     parser = argparse.ArgumentParser(
@@ -34,6 +35,7 @@ def main():
     r = hstp.Reader(i, args.input)
     r.load_podcasts()
     r.save(args.output)
+
 
 if __name__ == "__main__":
     main()
