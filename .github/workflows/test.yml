@@ -1,3 +1,4 @@
+
 name: Test
 on: [push]
 jobs:
@@ -7,6 +8,8 @@ jobs:
       - uses: actions/checkout@master
       - uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
-      - name: Test
-        uses: onichandame/python-test-action@master
+          python-version: '3.8'
+      - name: install hstp
+        run: pip install .
+      - name: test
+        run: python -m unittest
