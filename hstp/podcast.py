@@ -87,8 +87,8 @@ class Podcast:
             "name": self.name,
             "slug": self.slug,
             "description": self.description,
-            "last-updated": dates[-1],
-            "first-episode": dates[0],
+            "last-updated": dates[-1] if dates else "1970-01-01T00:00:00Z",
+            "first-episode": dates[0] if dates else "1970-01-01T00:00:00Z",
             "links": self.links
         }
 
