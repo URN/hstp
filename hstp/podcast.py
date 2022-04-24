@@ -9,8 +9,14 @@ from lxml.etree import Element, SubElement, QName, tounicode
 class Podcast:
 
     @classmethod
-    def load(cls, info, data):
+    def load(cls, info, path):
         """ Loads a podcast from a dict """
+
+        with open(path, "r") as f:
+            data = json.load(f)
+
+        pth = path[:-5]
+
         p = cls(
             info,
             name=data["name"],
@@ -21,7 +27,7 @@ class Podcast:
 
         if "episodes" in data:
             for e in data["episodes"]:
-                p.add_episode(Episode.load(info, e))
+                p.add_episode(Episode.load(info, e, pth))
 
         return p
 

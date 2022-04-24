@@ -9,7 +9,7 @@ class Episode:
     """ Class containing the information for a single podcast episode"""
 
     @classmethod
-    def load(cls, info, data):
+    def load(cls, info, data, path):
         """ Loads an episode from a dict """
         e = cls(
             info,
@@ -17,8 +17,8 @@ class Episode:
             slug=data["slug"],
             description=data["description"],
             date=datetime.strptime(data["date"], "%Y-%m-%dT%H:%M:%S"),
-            file=data["file"],
-            thumb=data["thumb"]
+            file=f"{path}/{data['slug']}.mp3",
+            thumb=f"{path}/{data['slug']}.jpg"
         )
 
         return e
