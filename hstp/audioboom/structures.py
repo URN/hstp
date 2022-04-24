@@ -1,6 +1,6 @@
 import json
 
-from audioboom import utils
+from hstp.audioboom import utils
 
 
 class Episode:

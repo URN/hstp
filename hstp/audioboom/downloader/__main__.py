@@ -1,6 +1,6 @@
 import argparse
 
-import audioboom
+import hstp.audioboom
 
 
 def main():

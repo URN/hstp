@@ -1,6 +1,6 @@
-from audioboom import *
-import audioboom
-import audioboom.utils as utils
+from hstp.audioboom import *
+import hstp.audioboom
+import hstp.audioboom.utils as utils
 
 from os.path import join, exists, relpath
 from os import mkdir
