@@ -1,7 +1,9 @@
 import os
+import json
 from datetime import datetime
 
 from .utils import is_slug
+from .episode import Episode
 
 from lxml.etree import Element, SubElement, QName, tounicode
 
@@ -31,7 +33,7 @@ class Podcast:
 
         return p
 
-    def __init__(self, info, name, slug, description, thumb, links=None):
+    def __init__(self, info, name, slug, description, thumb, links=dict()):
         self.info = info
 
         # Check Arguments
@@ -78,7 +80,7 @@ class Podcast:
                 valid = False
 
         if links is None or not isinstance(links, dict):
-            info.error("Links must be links")
+            info.error("Links must be dictionary")
 
         if not valid:
             raise ValueError("Invalid Podcast")
