@@ -1,7 +1,9 @@
 import os
+import json
 from datetime import datetime
 
 from .utils import is_slug
+from .episode import Episode
 
 from lxml.etree import Element, SubElement, QName, tounicode
 
