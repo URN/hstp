@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "hstp"
-version = "2.0.1"
+version = "2.0.2"
 description = "hstp build"
 authors = ["University Radio Nottingham <web@urn1350.net>"]
 license = "MIT"
