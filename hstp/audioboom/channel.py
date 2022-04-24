@@ -1,5 +1,4 @@
 from hstp.audioboom import *
-import hstp.audioboom
 import hstp.audioboom.utils as utils
 
 from os.path import join, exists, relpath
