@@ -8,6 +8,21 @@ from .utils import is_slug
 class Episode:
     """ Class containing the information for a single podcast episode"""
 
+    @classmethod
+    def load(cls, info, data):
+        """ Loads an episode from a dict """
+        e = cls(
+            info,
+            name=data["name"],
+            slug=data["slug"],
+            description=data["description"],
+            date=datetime.strptime(data["date"], "%Y-%m-%dT%H:%M:%S"),
+            file=data["file"],
+            thumb=data["thumb"]
+        )
+
+        return e
+
     def __init__(self, info, name, slug, description, date, file, thumb=None):
         self.info = info
 

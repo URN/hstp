@@ -7,6 +7,24 @@ from lxml.etree import Element, SubElement, QName, tounicode
 
 
 class Podcast:
+
+    @classmethod
+    def load(cls, info, data):
+        """ Loads a podcast from a dict """
+        p = cls(
+            info,
+            name=data["name"],
+            slug=data["slug"],
+            description=data["description"],
+            links=data["links"]
+        )
+
+        if "episodes" in data:
+            for e in data["episodes"]:
+                p.add_episode(Episode.load(info, e))
+
+        return p
+
     def __init__(self, info, name, slug, description, thumb, links=None):
         self.info = info
 
