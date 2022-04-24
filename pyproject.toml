@@ -13,6 +13,7 @@ pep8 = "1.7.1"
 pycodestyle = "2.7.0"
 python-dateutil = "2.8.2"
 simple-colors = "0.1.5"
+requests = "^2.27.1"
 
 [tool.poetry.dev-dependencies]
 
