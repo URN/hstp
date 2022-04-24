@@ -1,6 +1,6 @@
 import argparse
 
-import audioboom
+from hstp.audioboom import channel
 
 
 def main():
@@ -16,7 +16,7 @@ def main():
 
     args = parser.parse_args()
 
-    c = audioboom.Channel(args.id)
+    c = Channel(args.id)
 
     c.get_episodes()
     c.get_playlists()
