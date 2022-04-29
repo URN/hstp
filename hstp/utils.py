@@ -11,7 +11,7 @@ def subdirectories(dir):
     return [
         x
         for x in os.listdir(dir)
-        if os.path.isdir(f"{dir}/{x}")
+        if os.path.isdir(f"{dir}/{x}") and x[0] != '.'
     ]
 
 
