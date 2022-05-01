@@ -24,7 +24,8 @@ class Podcast:
             name=data["name"],
             slug=data["slug"],
             description=data["description"],
-            links=data["links"]
+            links=data["links"],
+            thumb=f"{pth}.jpg"
         )
 
         if "episodes" in data:
