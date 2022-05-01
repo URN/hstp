@@ -12,6 +12,11 @@ class Episode:
     @classmethod
     def load(cls, info, data, path):
         """ Loads an episode from a dict """
+        
+        thumb = f"{path}/{data['slug']}.jpg"
+        if not os.path.isfile(thumb):
+            thumb=None
+        
         e = cls(
             info,
             name=data["name"],
@@ -19,7 +24,7 @@ class Episode:
             description=data["description"],
             date=parser.isoparse(data["date"]),
             file=f"{path}/{data['slug']}.mp3",
-            thumb=f"{path}/{data['slug']}.jpg"
+            thumb=thumb
         )
 
         return e
