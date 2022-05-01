@@ -1,5 +1,6 @@
 import os
 from datetime import datetime
+from dateutil import parser
 from mutagen.mp3 import MP3
 
 from .utils import is_slug
@@ -16,7 +17,7 @@ class Episode:
             name=data["name"],
             slug=data["slug"],
             description=data["description"],
-            date=datetime.strptime(data["date"], "%Y-%m-%dT%H:%M:%S"),
+            date=parser.isoparse(data["date"]),
             file=f"{path}/{data['slug']}.mp3",
             thumb=f"{path}/{data['slug']}.jpg"
         )
