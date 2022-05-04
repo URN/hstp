@@ -41,6 +41,9 @@ class Reader:
                     lines = desc.read().split("\n")
                     category = lines[0]
                     subcategory = lines[1] if len(lines) > 1 else None
+            else:
+                category = None
+                subcategory = None
 
             p = hstp.Podcast(self.info, title, slug, d,
                              f"{self.input_path}/{slug}/image.jpg",
