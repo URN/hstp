@@ -1,3 +1,4 @@
+from nis import cat
 import os
 import json
 from datetime import datetime
@@ -25,7 +26,9 @@ class Podcast:
             slug=data["slug"],
             description=data["description"],
             links=data["links"],
-            thumb=f"{pth}.jpg"
+            thumb=f"{pth}.jpg",
+            category=data.get("category") or None,
+            subcategory=data.get("subcategory") or None
         )
 
         if "episodes" in data:
@@ -34,7 +37,7 @@ class Podcast:
 
         return p
 
-    def __init__(self, info, name, slug, description, thumb, links=dict()):
+    def __init__(self, info, name, slug, description, thumb, links=dict(), category=None, subcategory=None):
         self.info = info
 
         # Check Arguments
@@ -82,6 +85,21 @@ class Podcast:
 
         if links is None or not isinstance(links, dict):
             info.error("Links must be dictionary")
+        
+        if not category:
+            info.warn(f"A category is highly recommended.")
+        elif not isinstance(category, str):
+            info.error(
+                f"category is required to be a string, "
+                f"got {type(category)}"
+            )
+            valid = False
+        elif subcategory and not isinstance(subcategory, str):
+            info.error(
+                f"subcategory is required to be a string, "
+                f"got {type(subcategory)}"
+            )
+            valid = False
 
         if not valid:
             raise ValueError("Invalid Podcast")
@@ -91,6 +109,8 @@ class Podcast:
         self.description = description
         self.thumb = thumb
         self.links = links
+        self.category = category
+        self.subcategory = subcategory
 
         self.episodes = dict()
 
@@ -116,7 +136,9 @@ class Podcast:
             "description": self.description,
             "last-updated": dates[-1] if dates else "1970-01-01T00:00:00Z",
             "first-episode": dates[0] if dates else "1970-01-01T00:00:00Z",
-            "links": self.links
+            "links": self.links,
+            "category": self.category,
+            "subcategory": self.subcategory
         }
 
         if include_episodes:
@@ -158,8 +180,11 @@ class Podcast:
         SubElement(c, QName(NSMAP['itunes'], "image")).set(
             "href", f"{data['webroot']}/{self.slug}.jpg")
         SubElement(c, QName(NSMAP['itunes'], "explicit")).text = "no"
-        SubElement(c, QName(NSMAP['itunes'], "category")
-                   ).text = "Technology"  # Load from somewhere
+        cat = SubElement(c, QName(NSMAP['itunes'], "category")
+                         ).text = self.category or "Technology"
+        if self.subcategory:
+            SubElement(cat, QName(NSMAP['itunes'],
+                       "category")).text = self.subcategory
         SubElement(c, QName(NSMAP['itunes'], "type")).text = "episodic"
         # British, but will promote to US
         SubElement(c, QName(NSMAP['itunes'], "countryOfOrigin")).text = "GB US"

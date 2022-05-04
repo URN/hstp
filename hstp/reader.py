@@ -35,9 +35,16 @@ class Reader:
                     for line in lines:
                         s = line.split(" ")
                         links[" ".join(s[1:])] = s[0]
+            cats_path = f"{self.input_path}/{slug}/categories.txt"
+            if os.path.exists(cats_path):
+                with open(cats_path) as desc:
+                    lines = desc.read().split("\n")
+                    category = lines[0]
+                    subcategory = lines[1] if len(lines) > 1 else None
 
             p = hstp.Podcast(self.info, title, slug, d,
-                             f"{self.input_path}/{slug}/image.jpg", links)
+                             f"{self.input_path}/{slug}/image.jpg",
+                             links, category, subcategory)
 
             eps = hstp.utils.subdirectories(f"{self.input_path}/{slug}")
             for ep_slug in eps:
