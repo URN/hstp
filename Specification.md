@@ -51,8 +51,9 @@ JSON Fields:
 -   `first-episode` - ISO8601 compatible date-time from when the first episode was added.
 -   `last-updated` - ISO8601 compatible date-time from when the latest episode was added.
 -    `links` - JSON object of external links as key/value pairs. For example (Optional, may be empty/null in trees older than v2)
-    -   `spotify` -  link to the spotify podcast
-
+     -   `spotify` -  link to the spotify podcast
+-    `category` The category of the podcast (as per apple [podcast guides](https://podcasters.apple.com/support/1691-apple-podcasts-categories)) (optional)
+-    `subcategory` The subcategory of the podcast (as per apple [podcast guides](https://podcasters.apple.com/support/1691-apple-podcasts-categories)) (optional)
 ## Images & Media Files
 
 -   Podcast Thumbnail (required) - The thumbnail for the podcast, it should be `/holmes-crime-hour.jpg` (note the lowercase extension)
@@ -102,6 +103,9 @@ the command `hstp`
              -   `audio.mp3` - The audio of the podcast
              -   `image.jpg` - (Optional) icon for the podcast
         -   `links.txt` - List of links (Apple Music, Spotify etc) in the format 
+        -   `categories.txt` - (Optional) Categories for the Podcast
+            -   The first line is read as the Category
+            -   The second line is read as the subdirectory 
         ```
         https://example.com Example Website
         ```
