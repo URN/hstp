@@ -180,8 +180,8 @@ class Podcast:
         SubElement(c, QName(NSMAP['itunes'], "image")).set(
             "href", f"{data['webroot']}/{self.slug}.jpg")
         SubElement(c, QName(NSMAP['itunes'], "explicit")).text = "no"
-        cat = SubElement(c, QName(NSMAP['itunes'], "category")
-                         ).text = self.category or "Technology"
+        cat = SubElement(c, QName(NSMAP['itunes'], "category"))
+        cat.text = self.category or "Technology"
         if self.subcategory:
             SubElement(cat, QName(NSMAP['itunes'],
                        "category")).text = self.subcategory
